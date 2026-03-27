@@ -1,8 +1,15 @@
 const employees = [
   {
     id: 1,
+    firstName: "Rahul",
     email: "employee1@example.com",
     password: "123",
+    taskNumber: {
+      active: 1,
+      newTask: 2,
+      completed: 1,
+      failed: 0
+    },
     tasks: [
       {
         active: true,
@@ -38,8 +45,15 @@ const employees = [
   },
   {
     id: 2,
+    firstName: "Priya",
     email: "employee2@example.com",
     password: "123",
+    taskNumber: {
+      active: 2,
+      newTask: 1,
+      completed: 1,
+      failed: 2
+    },
     tasks: [
       {
         active: true,
@@ -85,8 +99,15 @@ const employees = [
   },
   {
     id: 3,
+    firstName: "Amit",
     email: "employee3@example.com",
     password: "123",
+    taskNumber: {
+      active: 2,
+      newTask: 3,
+      completed: 0,
+      failed: 1
+    },
     tasks: [
       {
         active: true,
@@ -122,8 +143,15 @@ const employees = [
   },
   {
     id: 4,
+    firstName: "Neha",
     email: "employee4@example.com",
     password: "123",
+    taskNumber: {
+      active: 2,
+      newTask: 1,
+      completed: 1,
+      failed: 0
+    },
     tasks: [
       {
         active: true,
@@ -159,8 +187,15 @@ const employees = [
   },
   {
     id: 5,
+    firstName: "Arjun",
     email: "employee5@example.com",
     password: "123",
+    taskNumber: {
+      active: 2,
+      newTask: 3,
+      completed: 1,
+      failed: 0
+    },
     tasks: [
       {
         active: true,
@@ -210,7 +245,8 @@ const admin = [
   {
     id: 1,
     email: "admin@example.com",
-    password: "123"
+    password: "123",
+    firstName: "Mr. Admin",
   }
 ];
 
@@ -221,5 +257,6 @@ export const setlocalStorage = ()=>{
 export const getLocalStorage = ()=>{
     const employees = JSON.parse(localStorage.getItem('employees'));
     const admin = JSON.parse(localStorage.getItem('admin'));
-   console.log(employees,admin)
+    return {employees,admin};
 }
+
