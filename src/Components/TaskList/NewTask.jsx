@@ -8,7 +8,7 @@ const NewTask = ({data}) => {
           <h4 className='text-sm'>{data.date}</h4>
         </div>
         <h2 className='mt-5 font-semibold text-xl'>{data.title}</h2>
-        <p className='mt-3 text-sm'>{data.desciption}</p>
+        <p className='mt-3 text-sm'>{data.description}</p>
         <div className='mt-6 flex justify-center text-sm '>
             <button className='bg-yellow-500 px-4 py-2'>Accept Task</button>
         </div>

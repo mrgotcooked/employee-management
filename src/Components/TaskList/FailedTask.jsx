@@ -8,7 +8,7 @@ const FailedTask = ({data}) => {
           <h4 className='text-sm'>{data.date}</h4>
         </div>
         <h2 className='mt-5 font-semibold text-xl'>{data.title}</h2>
-        <p className='mt-3 text-sm'>{data.desciption}</p>
+        <p className='mt-3 text-sm'>{data.description}</p>
         <div className='mt-4 flex justify-center'>
             <button className='px-6 py-2 bg-purple-700'>Failed</button>
         </div>

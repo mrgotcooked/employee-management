@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const CreateTask = () => {
+const CreateTask = (props) => {
     const [taskTitle, setTaskTitle] = useState('')
     const [date, setDate] = useState('')
     const [category, setCategory] = useState('')
@@ -9,19 +9,32 @@ const CreateTask = () => {
     const [newTask, setNewTask] = useState({})
     const submitHandler = (e)=>{
         e.preventDefault();
-        setNewTask({taskTitle,date,category,taskDescription,active:false,newTask:true,failed:false,comleted:false});
+        const taskObj={
+            active:false,
+            newTask:true,
+            completed:false,
+            failed:false,
+            title:taskTitle,
+            description:taskDescription,
+            date:date,
+            category:category,
+        };
         const data = JSON.parse(localStorage.getItem('employees'));
         data.forEach(function(e){
             if(assignTo==e.firstName){
-                e.tasks.push(newTask);
-                console.log(e.tasks);
-            }
-             setCategory('');
-             setDate('');
-             setAssignTo('');
-             setTaskDescription('');
-             setTaskTitle('');   
+                e.tasks.push(taskObj);    
+                e.taskNumber.newTask=e.taskNumber.newTask+1;
+            }   
         })
+        console.log(data);  
+        localStorage.setItem('employees',JSON.stringify(data));
+        props.refreshEmployeeData();
+        console.log("Updated employees:", data);
+        setCategory('');
+        setDate('');
+        setAssignTo('');
+        setTaskDescription('');
+        setTaskTitle('');
     }
     return (
         <div className='p-5 bg-[#1C1C1C] mt-7 rounded'>

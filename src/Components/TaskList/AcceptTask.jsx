@@ -9,7 +9,7 @@ const AcceptTask = ({data}) => {
           <h4 className='text-sm'>{data.date}</h4>
         </div>
         <h2 className='mt-5 font-semibold text-xl'>{data.title}</h2>
-        <p className='mt-3 text-sm'>{data.desciption}</p>
+        <p className='mt-3 text-sm'>{data.description}</p>
         <div className='flex mt-5 gap-5'>
             <button className='bg-green-500 px-2 py-1 text-sm'>Mark as Completed</button>
             <button className='bg-red-500 px-2 py-1 text-sm'>Mark as Failed</button>
