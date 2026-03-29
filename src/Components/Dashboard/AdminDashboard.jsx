@@ -4,12 +4,20 @@ import CreateTask from '../../Others/CreateTask'
 import AllTasks from '../../Others/AllTasks'
 
 const AdminDashboard = (props) => {  
-  
+  const [employeeData, setEmployeeData] = useState([]);
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('employees'))||[];
+    setEmployeeData(data);
+  }, [])
+  const updateAdminData = () =>{
+    const freshData = JSON.parse(localStorage.getItem('employees'))||[];
+    setEmployeeData(freshData);
+  }
   return (
     <div className='h-screen w-full p-10'>
       <Header changeUser={props.changeUser} data={props.data}/>
-      <CreateTask refreshEmployeeData={props.refreshEmployeeData}/>
-      <AllTasks/>
+      <CreateTask updateAdminData={updateAdminData} />
+      <AllTasks employeeData={employeeData}/>
     </div>
   )
 }

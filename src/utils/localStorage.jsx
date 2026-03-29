@@ -6,9 +6,9 @@ const employees = [
     password: "123",
     taskNumber: {
       active: 1,
-      newTask: 2,
+      newTask: 0,
       completed: 1,
-      failed: 0
+      failed: 1,
     },
     tasks: [
       {
@@ -50,7 +50,7 @@ const employees = [
     password: "123",
     taskNumber: {
       active: 2,
-      newTask: 1,
+      newTask: 2,
       completed: 1,
       failed: 2
     },

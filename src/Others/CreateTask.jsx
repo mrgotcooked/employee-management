@@ -28,7 +28,7 @@ const CreateTask = (props) => {
         })
         console.log(data);  
         localStorage.setItem('employees',JSON.stringify(data));
-        props.refreshEmployeeData();
+        props.updateAdminData();
         console.log("Updated employees:", data);
         setCategory('');
         setDate('');

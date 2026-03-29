@@ -6,6 +6,7 @@ import { getLocalStorage, setlocalStorage } from './utils/localStorage'
 import { AuthContext } from './Context/AuthProvider'
 
 const App = () => {
+  // localStorage.clear()
   const [user, setUser] = useState(null);
   const authData = useContext(AuthContext);
   const [loggedInUserData, setLoggedInUserData] = useState(null);
@@ -78,7 +79,7 @@ const App = () => {
   return (
     <> 
       {!user && <Login handleLogin={handleLogin}/>}
-      {user === 'employee' && <EmployeeDashboard changeUser={setUser} data={loggedInUserData}/>}
+      {user === 'employee' && <EmployeeDashboard changeUser={setUser} data={loggedInUserData} updateData={setLoggedInUserData}/>}
       {user === 'admin' && <AdminDashboard changeUser={setUser} data={loggedInUserData} refreshEmployeeData={refreshEmployeeData} />}
     </>
   )
