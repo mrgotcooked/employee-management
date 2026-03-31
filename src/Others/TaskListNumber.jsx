@@ -2,23 +2,33 @@ import React from 'react'
 
 const TaskListNumber = ({data}) => {
   return (
-    <div className='flex mt-10 gap-10'>
-      <div className=' w-[45%] bg-blue-400 rounded-xl px-10 py-5'>
-        <h2 className='text-3xl'>{data.taskNumber.newTask}</h2>
-        <h3 className='text-xl'>New Task</h3>
+    // 1. Layout Fix: Swapped from 'flex' to 'grid'. This ensures they are always perfectly equally sized!
+    <div className='mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5'>
+      
+      {/* New Task Card: Blue Theme */}
+      <div className='rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm'>
+        <h2 className='text-4xl font-bold text-blue-500'>{data.taskNumber.newTask}</h2>
+        <h3 className='mt-2 text-lg font-medium text-zinc-300'>New Task</h3>
       </div>
-      <div className=' w-[45%] bg-red-400 rounded-xl px-10 py-5'>
-        <h2 className='text-3xl'>{data.taskNumber.completed}</h2>
-        <h3 className='text-xl'>Completed Task</h3>
+
+      {/* Active (Accepted) Task Card: Yellow Theme */}
+      <div className='rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm'>
+        <h2 className='text-4xl font-bold text-yellow-500'>{data.taskNumber.active}</h2>
+        <h3 className='mt-2 text-lg font-medium text-zinc-300'>Accepted Task</h3>
       </div>
-      <div className=' w-[45%] bg-green-400 rounded-xl px-10 py-5'>
-        <h2 className='text-3xl'>{data.taskNumber.active}</h2>
-        <h3 className='text-xl'>Accepted Task</h3>
+
+      {/* Completed Task Card: Emerald (Green) Theme */}
+      <div className='rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm'>
+        <h2 className='text-4xl font-bold text-emerald-500'>{data.taskNumber.completed}</h2>
+        <h3 className='mt-2 text-lg font-medium text-zinc-300'>Completed Task</h3>
       </div>
-      <div className=' w-[45%] bg-yellow-400 rounded-xl px-10 py-5'>
-        <h2 className='text-3xl'>{data.taskNumber.failed}</h2>
-        <h3 className='text-xl'>Failed Task</h3>
+
+      {/* Failed Task Card: Rose (Red) Theme */}
+      <div className='rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm'>
+        <h2 className='text-4xl font-bold text-rose-500'>{data.taskNumber.failed}</h2>
+        <h3 className='mt-2 text-lg font-medium text-zinc-300'>Failed Task</h3>
       </div>
+
     </div>
   )
 }

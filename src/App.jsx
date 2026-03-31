@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Login from './Components/Auth/Login'
 import EmployeeDashboard from './Components/Dashboard/EmployeeDashboard'
 import AdminDashboard from './Components/Dashboard/AdminDashboard'
-import { getLocalStorage, setlocalStorage } from './utils/localStorage'
+import { getLocalStorage, setLocalStorage } from './utils/localStorage'
 import { AuthContext } from './Context/AuthProvider'
 
 const App = () => {
@@ -14,28 +14,43 @@ const App = () => {
   // 1. Initial Local Storage Setup
   useEffect(() => {
     if(!localStorage.getItem('employees')) {
-      setlocalStorage();
+      setLocalStorage();
     }
     getLocalStorage();
   }, [])
   
   // 2. Persistent Login Check (UPDATED)
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-      const userData = JSON.parse(loggedInUser);
-      setUser(userData.role);
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem('loggedInUser');
+  //   if (loggedInUser) {
+  //     const userData = JSON.parse(loggedInUser);
+  //     setUser(userData.role);
       
-      // FIX: Fetch fresh data from the main 'employees' array if it's an employee
-      if (userData.role === 'employee') {
-        const employees = JSON.parse(localStorage.getItem('employees'));
-        const freshEmployeeData = employees.find((emp) => emp.email === userData.data.email);
-        setLoggedInUserData(freshEmployeeData);
-      } else {
+  //     // FIX: Fetch fresh data from the main 'employees' array if it's an employee
+  //     if (userData.role === 'employee') {
+  //       const employees = JSON.parse(localStorage.getItem('employees'));
+  //       const freshEmployeeData = employees.find((emp) => emp.email === userData.data.email);
+  //       setLoggedInUserData(freshEmployeeData);
+  //     } else {
+  //       setLoggedInUserData(userData.data);
+  //     }
+  //   }
+  // }, [])
+    useEffect(() => {
+      const loggedInUser=localStorage.getItem('loggedInUser');
+      if(loggedInUser){
+        const userData = JSON.parse(loggedInUser);
+        setUser(userData.role);
+        if(userData.role==='employee'){
+          const employees=JSON.parse(localStorage.getItem('employees'));
+          const freshEmployeeData=employees.find((emp)=>emp.email===userData.data.email);
+          setLoggedInUserData(freshEmployeeData);   
+     }
+     else 
         setLoggedInUserData(userData.data);
       }
-    }
-  }, [])
+    }, [])
+    
 
   // 3. Manual Refresh Function (Kept intact for Admin Dashboard prop)
   const refreshEmployeeData = () => {
@@ -49,31 +64,57 @@ const App = () => {
   }
 
   // 4. Login Handler (UPDATED)
-  const handleLogin = (email, password) => {
-    if (email === 'admin@me.com' && password === '123') {
-      const adminData = {firstName: "Admin"};
-      setLoggedInUserData(adminData);
-      setUser('admin');
-      localStorage.setItem('loggedInUser', JSON.stringify({role: 'admin', data: adminData}))
-    } 
-    else {
-      // FIX: Read directly from local storage instead of stale AuthContext
-      const employeesData = JSON.parse(localStorage.getItem('employees'));
+  // const handleLogin = (email, password) => {
+  //   if (email === 'admin@me.com' && password === '123') {
+  //     const adminData = {firstName: "Admin"};
+  //     setLoggedInUserData(adminData);
+  //     setUser('admin');
+  //     localStorage.setItem('loggedInUser', JSON.stringify({role: 'admin', data: adminData}))
+  //   } 
+  //   else {
+  //     // FIX: Read directly from local storage instead of stale AuthContext
+  //     const employeesData = JSON.parse(localStorage.getItem('employees'));
       
-      if (employeesData) {
-        const employee = employeesData.find((e) => email == e.email && e.password == password);
+  //     if (employeesData) {
+  //       const employee = employeesData.find((e) => email == e.email && e.password == password);
         
-        if (employee) {
-          setUser('employee');
-          localStorage.setItem('loggedInUser', JSON.stringify({role: 'employee', data: employee}));
-          setLoggedInUserData(employee);
-        } else {
-          alert("Invalid credentials");
-        }
-      } else {
-        alert("Invalid credentials");
+  //       if (employee) {
+  //         setUser('employee');
+  //         localStorage.setItem('loggedInUser', JSON.stringify({role: 'employee', data: employee}));
+  //         setLoggedInUserData(employee);
+  //       } else {
+  //         alert("Invalid credentials");
+  //       }
+  //     } else {
+  //       alert("Invalid credentials");
+  //     }
+  //   }
+  // }
+
+  const handleLogin = (email,password) =>{
+      if(email==='admin@me.com'&&password==='123'){
+        const adminData = {firstName:"Admin"};
+        setLoggedInUserData(adminData);
+        setUser('admin');
+        localStorage.setItem('loggedInUser',JSON.stringify({role:'admin',data:'adminData'}));
       }
-    }
+      else{
+        const employeesData = JSON.parse(localStorage.getItem('employees'));
+        if(employeesData){
+          const employee = employeesData.find((emp)=>emp.email===email&&emp.password===password);
+          if(employee){
+            setLoggedInUserData(employee);
+            setUser('employee');
+            localStorage.setItem('loggedInUser',JSON.stringify({role:'employee',data:employee}))
+          }
+          else{
+            alert('Invalid credentials')
+          }
+        }
+        else{
+          alert('Invalid credentials');
+        }
+      }
   }
   
   return (

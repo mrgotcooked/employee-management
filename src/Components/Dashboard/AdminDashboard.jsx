@@ -14,7 +14,7 @@ const AdminDashboard = (props) => {
     setEmployeeData(freshData);
   }
   return (
-    <div className='h-screen w-full p-10'>
+    <div className='h-screen w-full p-10 bg-zinc-950'>
       <Header changeUser={props.changeUser} data={props.data}/>
       <CreateTask updateAdminData={updateAdminData} />
       <AllTasks employeeData={employeeData}/>
